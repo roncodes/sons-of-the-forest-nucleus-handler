@@ -1,42 +1,40 @@
 Hub.Handler.Version = 2;
-Hub.Handler.Id = "j5H59Zg9rvcX2xBAu";
-Hub.Maintainer.Name = "roncodes";
-Hub.Maintainer.Id = "ai5XorTybzMkJg5Sp";
+Hub.Handler.Id = 'j5H59Zg9rvcX2xBAu';
+Hub.Maintainer.Name = 'roncodes';
+Hub.Maintainer.Id = 'ai5XorTybzMkJg5Sp';
 
-Game.ExecutableContext = ["SonsOfTheForest_Data"];
-Game.DirSymlinkExclusions = ["SonsOfTheForest_Data\\Plugins"];
-Game.FileSymlinkExclusions = ["steam_api.dll", "steam_api64.dll", "steam_appid.txt"];
-Game.GameName = "Sons Of The Forest";
+Game.ExecutableContext = ['SonsOfTheForest_Data'];
+Game.DirSymlinkExclusions = ['SonsOfTheForest_Data\\Plugins\\x86_64'];
+Game.FileSymlinkExclusions = ['steam_api.dll', 'steam_api64.dll', 'steam_appid.txt'];
+Game.GameName = 'Sons Of The Forest';
 Game.HandlerInterval = 100;
 Game.SymlinkExe = false;
 Game.SymlinkGame = true;
 Game.SymlinkFolders = true;
-Game.ExecutableName = "SonsOfTheForest.exe";
-Game.SteamID = "1326470";
-Game.GUID = "Sons Of The Forest x64";
+Game.ExecutableName = 'SonsOfTheForest.exe';
+Game.SteamID = '1326470';
+Game.GUID = 'Sons Of The Forest';
 Game.MaxPlayers = 8;
 Game.MaxPlayersOneMonitor = 8;
-Game.NeedsSteamEmulation = false;
 Game.UseGoldberg = true;
-Game.LauncherTitle = "";
+Game.LauncherTitle = '';
 Game.Hook.ForceFocus = true;
-Game.Hook.ForceFocusWindowName = "SonsOfTheForest";
+Game.Hook.ForceFocusWindowName = 'SonsOfTheForest';
 Game.FakeFocus = true;
-Game.FakeFocusInterval = 20000;
+Game.FakeFocusInterval = 15000;
 Game.SendFakeFocusMsg = true;
 Game.SetForegroundWindowElsewhere = true;
+Game.SetWindowHook = true;
 Game.Hook.DInputEnabled = false;
-Game.Hook.XInputEnabled = true;
+Game.Hook.XInputEnabled = false;
 Game.Hook.XInputReroute = false;
-Game.XInputPlusDll = ["xinput1_3.dll", "xinput1_4.dll", "xinput9_1_0.dll"];
 Game.Hook.CustomDllEnabled = false;
 Game.BlockRawInput = false;
-Game.UserProfileSavePath = "AppData\\LocalLow\\Endnight\\SonsOfTheForest";
+Game.UserProfileSavePath = 'AppData\\LocalLow\\Endnight\\SonsOfTheForest\\Saves';
 Game.Description =
-  "IMPORTANT: When the game launcher opens quickly tick windowed and click play for the windows to resize correctly. Host a multiplayer game and join in the other instances before clicking on the last focus hooks Nucleus prompt. If you use keyboards and mice after all the instances have launched, resized and positioned correctly, press the END key once to lock the input for all instances to have their own working cursor and keyboard. You need to left click each mouse to make the emulated cursors appear after locking the input. Press the END key again to unlock the input when you finish playing. You can also use CTRL+Q to close Nucleus and all its instances when the input is unlocked. Press the escape key if you still can see the cursor in-game in the center.";
-Game.PromptBetweenInstances = true;
-Game.PauseBetweenProcessGrab = 8;
-Game.PauseBetweenStarts = 40;
+    'IMPORTANT: Host a multiplayer game in one instance and join in the others. Set the correct custom resolution in the game graphics settings if the instances resize on their own once you get in-game, you need to create custom resolutions in your AMD/Nvidia/Intel panel (For example for a 1920x1080 monitor add: 960x1080, 960x540, 1920x540 etc.) so the game can see them and you can select them in-game. If you use keyboards and mice after all the instances have launched, resized and positioned correctly, press the END key once to lock the input for all instances to have their own working cursor and keyboard. You need to left click each mouse to make the emulated cursors appear after locking the input. Press the END key again to unlock the input when you finish playing. You can also use CTRL+Q to close Nucleus and all its instances when the input is unlocked.';
+Game.PauseBetweenProcessGrab = 5;
+Game.PauseBetweenStarts = 30;
 
 //USS deprecated options:
 
@@ -125,82 +123,80 @@ Game.ProtoInput.EnableFocusMessageLoop = false;
 //Game.ProtoInput.FocusLoop_WM_MOUSEACTIVATE = true;
 Game.ProtoInput.BlockedMessages = [0x0008, 0x02a3, 0x02a1]; // Blocks WM_KILLFOCUS, WM_MOUSEHOVER and WM_MOUSELEAVE
 
-Game.Play = function() {
-  var Args = (Context.Args = " -screen-fullscreen 0 -popupwindow " + " -screen-width " + Context.Width + " -screen-height " + Context.Height);
+Game.Play = function () {
+    var Args = (Context.Args = ' -screen-fullscreen 0 -popupwindow ' + ' -screen-width ' + Context.Width + ' -screen-height ' + Context.Height);
 
-  Context.StartArguments = Args;
+    Context.StartArguments = Args;
 
-  Context.EditRegKey("HKEY_CURRENT_USER", "Software\\Endnight\\SonsOfTheForest", "Screenmanager Is Fullscreen mode_h3981298716", 3, Nucleus.RegType.DWord);
+    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Is Fullscreen mode_h3981298716', 3, Nucleus.RegType.DWord);
 
-  Context.EditRegKey("HKEY_CURRENT_USER", "Software\\Endnight\\SonsOfTheForest", "Screenmanager Resolution Height_h2627697771", Context.Height, Nucleus.RegType.DWord);
+    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Resolution Height_h2627697771', Context.Height, Nucleus.RegType.DWord);
 
-  Context.EditRegKey("HKEY_CURRENT_USER", "Software\\Endnight\\SonsOfTheForest", "Screenmanager Resolution Width_h182942802", Context.Width, Nucleus.RegType.DWord);
+    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Resolution Width_h182942802', Context.Width, Nucleus.RegType.DWord);
 
-  if (Context.IsKeyboardPlayer) {
-    Game.ProtoInput.KeyboardButtonFilter = true;
-  } else {
-    Game.ProtoInput.KeyboardButtonFilter = false;
+    var cfgFilePath = Context.NucleusUserRoot + '\\AppData\\LocalLow\\Endnight\\SonsOfTheForest\\SonsGameSettings.cfg';
+    var windowMode = Context.FindLineNumberInTextFile(cfgFilePath, '      "Name": "Display.Fullscreen"', Nucleus.SearchType.Contains) + 1;
+    var windowModeLine = Context.FindLineNumberInTextFile(cfgFilePath, '      "Name": "Display.Fullscreen"', Nucleus.SearchType.Contains) + 2;
 
-    var savePath = Context.GetFolder(Nucleus.Folder.InstancedGameFolder) + "\\XInputPlus.ini";
-    Context.ModifySaveFile(savePath, savePath, Nucleus.SaveType.INI, [
-      new Nucleus.IniSaveInfo("ControllerNumber", "Controller1", Context.GamepadId),
-      new Nucleus.IniSaveInfo("ControllerNumber", "Controller2", Context.GamepadId),
-      new Nucleus.IniSaveInfo("ControllerNumber", "Controller3", Context.GamepadId),
-      new Nucleus.IniSaveInfo("ControllerNumber", "Controller4", Context.GamepadId)
-    ]);
-  }
+    Context.ReplaceLinesInTextFile(cfgFilePath, [windowMode + '|      "SettingType": 3,', windowModeLine + '|      "StringValue": "Windowed",']);
 
-  Game.ProtoInput.OnInputLocked = function() {
-    for (var i = 0; i < PlayerList.Count; i++) {
-      var player = PlayerList[i];
-
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetCursorPosHookID);
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.SetCursorPosHookID);
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyStateHookID);
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetAsyncKeyStateHookID);
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyboardStateHookID);
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.CursorVisibilityStateHookID);
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetRawInputDataHookID);
-
-      ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.FocusHooksHookID);
-
-      //Avoid the mouse move filter unless absolutely necessary as it can massively affect performance if the game gets primary input from mouse move messages
-      //ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseMoveFilterID);
-
-      ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.RawInputFilterID);
-      ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseActivateFilterID);
-      ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateFilterID);
-      ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateAppFilterID);
-      ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseWheelFilterID);
-      ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseButtonFilterID);
-
-      ProtoInput.SetDrawFakeCursor(player.ProtoInputInstanceHandle, true);
+    if (Context.IsKeyboardPlayer) {
+        Game.ProtoInput.KeyboardButtonFilter = true;
+    } else {
+        Game.ProtoInput.KeyboardButtonFilter = false;
     }
-  };
 
-  Game.ProtoInput.OnInputUnlocked = function() {
-    for (var i = 0; i < PlayerList.Count; i++) {
-      var player = PlayerList[i];
+    Game.ProtoInput.OnInputLocked = function () {
+        for (var i = 0; i < PlayerList.Count; i++) {
+            var player = PlayerList[i];
 
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetCursorPosHookID);
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.SetCursorPosHookID);
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyStateHookID);
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetAsyncKeyStateHookID);
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyboardStateHookID);
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.CursorVisibilityStateHookID);
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetRawInputDataHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetCursorPosHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.SetCursorPosHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyStateHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetAsyncKeyStateHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyboardStateHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.CursorVisibilityStateHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetRawInputDataHookID);
 
-      ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.FocusHooksHookID);
+            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.FocusHooksHookID);
 
-      ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.RawInputFilterID);
-      ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseMoveFilterID);
-      ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseActivateFilterID);
-      ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateFilterID);
-      ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateAppFilterID);
-      ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseWheelFilterID);
-      ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseButtonFilterID);
+            //Avoid the mouse move filter unless absolutely necessary as it can massively affect performance if the game gets primary input from mouse move messages
+            //ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseMoveFilterID);
 
-      ProtoInput.SetDrawFakeCursor(player.ProtoInputInstanceHandle, false);
-    }
-  };
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.RawInputFilterID);
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseActivateFilterID);
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateFilterID);
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateAppFilterID);
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseWheelFilterID);
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseButtonFilterID);
+
+            ProtoInput.SetDrawFakeCursor(player.ProtoInputInstanceHandle, true);
+        }
+    };
+
+    Game.ProtoInput.OnInputUnlocked = function () {
+        for (var i = 0; i < PlayerList.Count; i++) {
+            var player = PlayerList[i];
+
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetCursorPosHookID);
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.SetCursorPosHookID);
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyStateHookID);
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetAsyncKeyStateHookID);
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetKeyboardStateHookID);
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.CursorVisibilityStateHookID);
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetRawInputDataHookID);
+
+            ProtoInput.UninstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.FocusHooksHookID);
+
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.RawInputFilterID);
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseMoveFilterID);
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseActivateFilterID);
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateFilterID);
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateAppFilterID);
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseWheelFilterID);
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseButtonFilterID);
+
+            ProtoInput.SetDrawFakeCursor(player.ProtoInputInstanceHandle, false);
+        }
+    };
 };
