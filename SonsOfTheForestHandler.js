@@ -68,16 +68,16 @@ Game.Hook.FixPosition = false;
 
 // Input
 Game.SupportsKeyboard = true;
-Game.XInputPlusDll = ['xinput1_3.dll', 'xinput1_4.dll', 'xinput9_1_0.dll'];
 Game.KeyboardPlayerFirst = true;
-Game.UseX360ce = false;
 Game.PlayersPerInstance = 1;
+Game.UseX360ce = true;
+Game.X360ceDll = ['xinput1_3.dll', 'xinput1_4.dll', 'xinput9_1_0.dll'];
+Game.XboxOneControllerFix = true;
 Game.UseDevReorder = false;
-Game.XboxOneControllerFix = false;
 Game.BlockRawInput = false;
 Game.InjectHookXinput = true;
 Game.Hook.DInputEnabled = false;
-Game.Hook.XInputEnabled = true;
+Game.Hook.XInputEnabled = false;
 Game.Hook.XInputReroute = false;
 Game.Hook.CustomDllEnabled = false;
 
