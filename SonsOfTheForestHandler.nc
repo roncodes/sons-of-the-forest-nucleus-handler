@@ -1,4 +1,4 @@
-Hub.Handler.Version = 1;
+Hub.Handler.Version = 2;
 Hub.Handler.Id = "j5H59Zg9rvcX2xBAu";
 Hub.Maintainer.Name = "roncodes";
 Hub.Maintainer.Id = "ai5XorTybzMkJg5Sp";
