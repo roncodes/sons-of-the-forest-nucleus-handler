@@ -1,6 +1,6 @@
 const GAME_NAME = 'Sons Of The Forest';
 const WINDOWS_GAME_NAME = GAME_NAME.replace(/ /g, '');
-const APPDATA_PATH = `AppData\\LocalLow\\Endnight\\${WINDOWS_GAME_NAME}`;
+const APPDATA_PATH = 'AppData\\LocalLow\\Endnight\\' + WINDOWS_GAME_NAME;
 const VERSION = 1;
 
 // Hub Info
@@ -10,8 +10,8 @@ Hub.Maintainer.Name = 'roncodes';
 Hub.Maintainer.Id = 'ai5XorTybzMkJg5Sp';
 
 // Game
-Game.ExecutableName = `${WINDOWS_GAME_NAME}.exe`;
-Game.ExecutableContext = [`${WINDOWS_GAME_NAME}_Data`];
+Game.ExecutableName = WINDOWS_GAME_NAME + '.exe';
+Game.ExecutableContext = [WINDOWS_GAME_NAME + '_Data'];
 Game.GUID = GAME_NAME;
 Game.GameName = GAME_NAME;
 Game.SteamID = '1326470';
@@ -23,7 +23,7 @@ Game.SymlinkGame = true;
 Game.SymlinkExe = false;
 Game.SymlinkFolders = true;
 Game.KeepSymLinkOnExit = true;
-Game.DirSymlinkExclusions = [`${WINDOWS_GAME_NAME}_Data\\Plugins\\x86_64`];
+Game.DirSymlinkExclusions = [WINDOWS_GAME_NAME + '_Data\\Plugins\\x86_64'];
 Game.FileSymlinkExclusions = ['steam_api.dll', 'steam_api64.dll', 'steam_appid.txt'];
 Game.HardcopyGame = false;
 Game.HardlinkGame = false;
@@ -31,8 +31,8 @@ Game.ForceSymlink = false;
 
 // Co-Op Environment
 Game.UseNucleusEnvironment = false;
-Game.UserProfileConfigPath = `${APPDATA_PATH}\\Config`;
-Game.UserProfileSavePath = `${APPDATA_PATH}\\Saves`;
+Game.UserProfileConfigPath = APPDATA_PATH + '\\Config';
+Game.UserProfileSavePath = APPDATA_PATH + '\\Saves';
 Game.ForceUserProfileConfigCopy = false;
 Game.ForceUserProfileSaveCopy = false;
 Game.UserProfileConfigPathNoCopy = false;
@@ -139,7 +139,7 @@ Game.ProtoInput.BlockedMessages = [0x0008, 0x02a3, 0x02a1]; // Blocks WM_KILLFOC
 Game.HideCursor = true;
 Game.HideDesktop = false;
 Game.HideTaskbar = true;
-Game.Description = `Game Handler for ${GAME_NAME} - Work in Progress`;
+Game.Description = 'Game Handler for ' + GAME_NAME + ' - Work in Progress';
 
 // Support Mouse & Keyboards
 Game.SupportsMultipleKeyboardsAndMice = true;
@@ -169,7 +169,7 @@ Game.UpdateFakeMouseWithInternalInput = false;
 
 Game.Play = function () {
     var Args = (Context.Args = ' -screen-fullscreen 0 -popupwindow ' + ' -screen-width ' + Context.Width + ' -screen-height ' + Context.Height);
-    var cfgFilePath = Context.NucleusUserRoot + `${APPDATA_PATH}\\SonsGameSettings.cfg`;
+    var cfgFilePath = Context.NucleusUserRoot + APPDATA_PATH + '\\SonsGameSettings.cfg';
     var windowMode = Context.FindLineNumberInTextFile(cfgFilePath, '      "Name": "Display.Fullscreen"', Nucleus.SearchType.Contains) + 1;
     var windowModeLine = Context.FindLineNumberInTextFile(cfgFilePath, '      "Name": "Display.Fullscreen"', Nucleus.SearchType.Contains) + 2;
 
