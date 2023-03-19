@@ -28,6 +28,8 @@ Game.SetWindowHook = true;
 Game.XInputPlusDll = ["xinput1_3.dll", "xinput1_4.dll", "xinput9_1_0.dll"];
 Game.Hook.DInputEnabled = false;
 Game.Hook.XInputEnabled = true;
+Game.InjectHookXinput = true;
+Game.ProtoInput.XinputHook = true;
 Game.Hook.XInputReroute = false;
 Game.Hook.CustomDllEnabled = false;
 Game.BlockRawInput = false;
@@ -50,7 +52,7 @@ Game.HookFilterMouseMessages = false;
 Game.HookUseLegacyInput = false;
 Game.HookDontUpdateLegacyInMouseMsg = false;
 Game.HookMouseVisibility = false;
-Game.InjectHookXinput = false;
+Game.InjectHookXinput = true;
 
 Game.SendNormalMouseInput = false;
 Game.SendNormalKeyboardInput = false;
