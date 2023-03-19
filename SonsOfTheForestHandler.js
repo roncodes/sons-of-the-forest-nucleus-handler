@@ -25,14 +25,16 @@ Game.FakeFocusInterval = 15000;
 Game.SendFakeFocusMsg = true;
 Game.SetForegroundWindowElsewhere = true;
 Game.SetWindowHook = true;
+Game.XInputPlusDll = ["xinput1_3.dll", "xinput1_4.dll", "xinput9_1_0.dll"];
 Game.Hook.DInputEnabled = false;
-Game.Hook.XInputEnabled = false;
+Game.Hook.XInputEnabled = true;
 Game.Hook.XInputReroute = false;
 Game.Hook.CustomDllEnabled = false;
 Game.BlockRawInput = false;
 Game.UserProfileSavePath = 'AppData\\LocalLow\\Endnight\\SonsOfTheForest\\Saves';
 Game.Description =
     'IMPORTANT: Host a multiplayer game in one instance and join in the others. Set the correct custom resolution in the game graphics settings if the instances resize on their own once you get in-game, you need to create custom resolutions in your AMD/Nvidia/Intel panel (For example for a 1920x1080 monitor add: 960x1080, 960x540, 1920x540 etc.) so the game can see them and you can select them in-game. If you use keyboards and mice after all the instances have launched, resized and positioned correctly, press the END key once to lock the input for all instances to have their own working cursor and keyboard. You need to left click each mouse to make the emulated cursors appear after locking the input. Press the END key again to unlock the input when you finish playing. You can also use CTRL+Q to close Nucleus and all its instances when the input is unlocked.';
+Game.PromptBetweenInstances = true;
 Game.PauseBetweenProcessGrab = 5;
 Game.PauseBetweenStarts = 30;
 
