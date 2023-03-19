@@ -1,87 +1,98 @@
-Hub.Handler.Version = 2;
+const GAME_NAME = 'Sons Of The Forest';
+const WINDOWS_GAME_NAME = GAME_NAME.replace(/ /g, '');
+const APPDATA_PATH = `AppData\\LocalLow\\Endnight\\${WINDOWS_GAME_NAME}`;
+const VERSION = 1;
+
+// Hub Info
+Hub.Handler.Version = VERSION;
 Hub.Handler.Id = 'j5H59Zg9rvcX2xBAu';
 Hub.Maintainer.Name = 'roncodes';
 Hub.Maintainer.Id = 'ai5XorTybzMkJg5Sp';
 
-Game.ExecutableContext = ['SonsOfTheForest_Data'];
-Game.DirSymlinkExclusions = ['SonsOfTheForest_Data\\Plugins\\x86_64'];
-Game.FileSymlinkExclusions = ['steam_api.dll', 'steam_api64.dll', 'steam_appid.txt'];
-Game.GameName = 'Sons Of The Forest';
-Game.HandlerInterval = 100;
-Game.SymlinkExe = false;
-Game.SymlinkGame = true;
-Game.SymlinkFolders = true;
-Game.ExecutableName = 'SonsOfTheForest.exe';
+// Game
+Game.ExecutableName = `${WINDOWS_GAME_NAME}.exe`;
+Game.ExecutableContext = [`${WINDOWS_GAME_NAME}_Data`];
+Game.GUID = GAME_NAME;
+Game.GameName = GAME_NAME;
 Game.SteamID = '1326470';
-Game.GUID = 'Sons Of The Forest';
+Game.MaxPlayersOneMonitor = 4;
 Game.MaxPlayers = 8;
-Game.MaxPlayersOneMonitor = 8;
-Game.UseGoldberg = true;
-Game.LauncherTitle = '';
-Game.Hook.ForceFocus = true;
-Game.Hook.ForceFocusWindowName = 'SonsOfTheForest';
+
+// Filesystem
+Game.SymlinkGame = true;
+Game.SymlinkExe = false;
+Game.SymlinkFolders = true;
+Game.KeepSymLinkOnExit = true;
+Game.DirSymlinkExclusions = [`${WINDOWS_GAME_NAME}_Data\\Plugins\\x86_64`];
+Game.FileSymlinkExclusions = ['steam_api.dll', 'steam_api64.dll', 'steam_appid.txt'];
+Game.HardcopyGame = false;
+Game.HardlinkGame = false;
+Game.ForceSymlink = false;
+
+// Co-Op Environment
+Game.UseNucleusEnvironment = false;
+Game.UserProfileConfigPath = `${APPDATA_PATH}\\Config`;
+Game.UserProfileSavePath = `${APPDATA_PATH}\\Saves`;
+Game.ForceUserProfileConfigCopy = false;
+Game.ForceUserProfileSaveCopy = false;
+Game.UserProfileConfigPathNoCopy = false;
+Game.UserProfileSavePathNoCopy = false;
+Game.UseCurrentUserEnvironment = false;
+
+// Focus
 Game.FakeFocus = true;
-Game.FakeFocusInterval = 15000;
-Game.SendFakeFocusMsg = true;
-Game.SetForegroundWindowElsewhere = true;
+Game.HookFocus = true;
+Game.HookInit = true;
+Game.PreventWindowDeactivation = false;
+Game.HasDynamicWindowTitle = false;
+Game.IdInWindowTitle = true;
+Game.SetForegroundWindowElsewhere = false;
+Game.PreventGameFocus = false;
+Game.FakeFocusInterval = 1000;
+Game.EnableWindows = false;
+Game.ProcessChangesAtEnd = false;
+Game.PromptProcessChangesAtEnd = false;
+Game.PromptBetweenInstancesEnd = false;
+Game.Hook.ForceFocus = true;
+Game.Hook.ForceFocusWindowName = WINDOWS_GAME_NAME;
+
+// Window Manipulation
 Game.SetWindowHook = true;
-Game.XInputPlusDll = ["xinput1_3.dll", "xinput1_4.dll", "xinput9_1_0.dll"];
+Game.SetWindowHookStart = false;
+Game.KeepAspectRatio = false;
+Game.ResetWindows = true;
+Game.RefreshWindowAfterStart = false;
+Game.SetTopMostAtEnd = true;
+Game.Hook.FixResolution = false;
+Game.Hook.FixPosition = false;
+
+// Input
+Game.SupportsKeyboard = true;
+Game.XInputPlusDll = ['xinput1_3.dll', 'xinput1_4.dll', 'xinput9_1_0.dll'];
+Game.KeyboardPlayerFirst = true;
+Game.UseX360ce = false;
+Game.PlayersPerInstance = 1;
+Game.UseDevReorder = false;
+Game.XboxOneControllerFix = false;
+Game.BlockRawInput = false;
+Game.InjectHookXinput = true;
 Game.Hook.DInputEnabled = false;
 Game.Hook.XInputEnabled = true;
-Game.InjectHookXinput = true;
-Game.ProtoInput.XinputHook = true;
 Game.Hook.XInputReroute = false;
 Game.Hook.CustomDllEnabled = false;
-Game.BlockRawInput = false;
-Game.UserProfileSavePath = 'AppData\\LocalLow\\Endnight\\SonsOfTheForest\\Saves';
-Game.Description =
-    'IMPORTANT: Host a multiplayer game in one instance and join in the others. Set the correct custom resolution in the game graphics settings if the instances resize on their own once you get in-game, you need to create custom resolutions in your AMD/Nvidia/Intel panel (For example for a 1920x1080 monitor add: 960x1080, 960x540, 1920x540 etc.) so the game can see them and you can select them in-game. If you use keyboards and mice after all the instances have launched, resized and positioned correctly, press the END key once to lock the input for all instances to have their own working cursor and keyboard. You need to left click each mouse to make the emulated cursors appear after locking the input. Press the END key again to unlock the input when you finish playing. You can also use CTRL+Q to close Nucleus and all its instances when the input is unlocked.';
-Game.PromptBetweenInstances = true;
-Game.PauseBetweenProcessGrab = 5;
-Game.PauseBetweenStarts = 30;
 
-//USS deprecated options:
+// Goldberg Emulator
+Game.UseGoldberg = false;
 
-Game.HookSetCursorPos = false;
-Game.HookGetCursorPos = false;
-Game.HookGetKeyState = false;
-Game.HookGetAsyncKeyState = false;
-Game.HookGetKeyboardState = false;
-Game.HookFilterRawInput = false;
-Game.HookFilterMouseMessages = false;
-Game.HookUseLegacyInput = false;
-Game.HookDontUpdateLegacyInMouseMsg = false;
-Game.HookMouseVisibility = false;
-Game.InjectHookXinput = true;
-
-Game.SendNormalMouseInput = false;
-Game.SendNormalKeyboardInput = false;
-Game.SendScrollWheel = false;
-Game.ForwardRawKeyboardInput = false;
-Game.ForwardRawMouseInput = false;
-Game.HookReRegisterRawInput = false;
-Game.HookReRegisterRawInputMouse = false;
-Game.HookReRegisterRawInputKeyboard = false;
-Game.DrawFakeMouseCursor = false;
-
-//ProtoInput:
-
-Game.SupportsMultipleKeyboardsAndMice = true;
-
+// ProtoInput
 Game.ProtoInput.InjectStartup = false;
 Game.ProtoInput.InjectRuntime_RemoteLoadMethod = false;
 Game.ProtoInput.InjectRuntime_EasyHookMethod = true;
 Game.ProtoInput.InjectRuntime_EasyHookStealthMethod = false;
-
-Game.LockInputAtStart = false;
-Game.LockInputSuspendsExplorer = true;
 Game.ProtoInput.FreezeExternalInputWhenInputNotLocked = false;
-Game.LockInputToggleKey = 0x23;
-
 Game.ProtoInput.RenameHandlesHook = false;
 Game.ProtoInput.RenameHandles = [];
 Game.ProtoInput.RenameNamedPipes = [];
-
 Game.ProtoInput.RegisterRawInputHook = true;
 Game.ProtoInput.GetRawInputDataHook = false;
 Game.ProtoInput.MessageFilterHook = true;
@@ -97,7 +108,6 @@ Game.ProtoInput.DrawFakeCursor = false;
 Game.ProtoInput.ClipCursorHookCreatesFakeClip = true;
 Game.ProtoInput.EnableToggleFakeCursorVisibilityShortcut = false;
 Game.ProtoInput.DontShowCursorWhenImageUpdated = true;
-
 Game.ProtoInput.RawInputFilter = false;
 Game.ProtoInput.MouseMoveFilter = false;
 Game.ProtoInput.MouseActivateFilter = false;
@@ -106,7 +116,6 @@ Game.ProtoInput.WindowActvateAppFilter = false;
 Game.ProtoInput.MouseWheelFilter = false;
 Game.ProtoInput.MouseButtonFilter = false;
 Game.ProtoInput.KeyboardButtonFilter = true;
-
 Game.ProtoInput.SendMouseWheelMessages = true;
 Game.ProtoInput.SendMouseButtonMessages = true;
 Game.ProtoInput.SendMouseMovementMessages = true;
@@ -117,7 +126,6 @@ Game.ProtoInput.UseDinputRedirection = false;
 Game.ProtoInput.DinputDeviceHook = false;
 Game.ProtoInput.DinputHookAlsoHooksGetDeviceState = false;
 Game.ProtoInput.MultipleProtoControllers = false;
-
 Game.ProtoInput.EnableFocusMessageLoop = false;
 //Game.ProtoInput.FocusLoopIntervalMilliseconds = 5;
 //Game.ProtoInput.FocusLoop_WM_ACTIVATE = true;
@@ -127,35 +135,54 @@ Game.ProtoInput.EnableFocusMessageLoop = false;
 //Game.ProtoInput.FocusLoop_WM_MOUSEACTIVATE = true;
 Game.ProtoInput.BlockedMessages = [0x0008, 0x02a3, 0x02a1]; // Blocks WM_KILLFOCUS, WM_MOUSEHOVER and WM_MOUSELEAVE
 
+// Extra Configurations
+Game.HideCursor = true;
+Game.HideDesktop = false;
+Game.HideTaskbar = true;
+Game.Description = `Game Handler for ${GAME_NAME} - Work in Progress`;
+
+// Support Mouse & Keyboards
+Game.SupportsMultipleKeyboardsAndMice = true;
+Game.SendNormalMouseInput = true;
+Game.SendNormalKeyboardInput = true;
+Game.ForwardRawKeyboardInput = false;
+Game.ForwardRawMouseInput = false;
+Game.SendScrollWheel = false;
+Game.DrawFakeMouseCursor = true;
+Game.DrawFakeMouseForControllers = false;
+Game.HookFilterRawInput = false;
+Game.HookFilterMouseMessages = false;
+Game.HookGetCursorPos = true;
+Game.HookSetCursorPos = true;
+Game.HookUseLegacyInput = false;
+Game.HookDontUpdateLegacyInMouseMsg = false;
+Game.HookGetKeyState = false;
+Game.HookGetAsyncKeyState = true;
+Game.HookGetKeyboardState = false;
+Game.HookMouseVisibility = false;
+Game.LockInputAtStart = true;
+Game.LockInputToggleKey = 0x23; //See https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
+Game.HookReRegisterRawInput = false; //Re-register raw input from directly within game process | Recommended to disable forwarding input while using this
+Game.HookReRegisterRawInputMouse = true;
+Game.HookReRegisterRawInputKeyboard = true;
+Game.UpdateFakeMouseWithInternalInput = false;
+
 Game.Play = function () {
     var Args = (Context.Args = ' -screen-fullscreen 0 -popupwindow ' + ' -screen-width ' + Context.Width + ' -screen-height ' + Context.Height);
-
-    Context.StartArguments = Args;
-
-    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Is Fullscreen mode_h3981298716', 3, Nucleus.RegType.DWord);
-
-    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Resolution Height_h2627697771', Context.Height, Nucleus.RegType.DWord);
-
-    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Resolution Width_h182942802', Context.Width, Nucleus.RegType.DWord);
-
-    var cfgFilePath = Context.NucleusUserRoot + '\\AppData\\LocalLow\\Endnight\\SonsOfTheForest\\SonsGameSettings.cfg';
+    var cfgFilePath = Context.NucleusUserRoot + `${APPDATA_PATH}\\SonsGameSettings.cfg`;
     var windowMode = Context.FindLineNumberInTextFile(cfgFilePath, '      "Name": "Display.Fullscreen"', Nucleus.SearchType.Contains) + 1;
     var windowModeLine = Context.FindLineNumberInTextFile(cfgFilePath, '      "Name": "Display.Fullscreen"', Nucleus.SearchType.Contains) + 2;
 
+    Context.StartArguments = Args;
+    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Is Fullscreen mode_h3981298716', 3, Nucleus.RegType.DWord);
+    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Resolution Height_h2627697771', Context.Height, Nucleus.RegType.DWord);
+    Context.EditRegKey('HKEY_CURRENT_USER', 'SOFTWARE\\Endnight\\SonsOfTheForest', 'Screenmanager Resolution Width_h182942802', Context.Width, Nucleus.RegType.DWord);
     Context.ReplaceLinesInTextFile(cfgFilePath, [windowMode + '|      "SettingType": 3,', windowModeLine + '|      "StringValue": "Windowed",']);
 
     if (Context.IsKeyboardPlayer) {
         Game.ProtoInput.KeyboardButtonFilter = true;
     } else {
         Game.ProtoInput.KeyboardButtonFilter = false;
-
-        var savePath = Context.GetFolder(Nucleus.Folder.InstancedGameFolder) + '\\XInputPlus.ini';
-        Context.ModifySaveFile(savePath, savePath, Nucleus.SaveType.INI, [
-            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller1', Context.GamepadId),
-            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller2', Context.GamepadId),
-            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller3', Context.GamepadId),
-            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller4', Context.GamepadId),
-        ]);
     }
 
     Game.ProtoInput.OnInputLocked = function () {
@@ -170,19 +197,20 @@ Game.Play = function () {
             ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.CursorVisibilityStateHookID);
             ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.GetRawInputDataHookID);
 
-            ProtoInput.InstallHook(player.ProtoInputInstanceHandle, ProtoInput.Values.FocusHooksHookID);
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.RawInputFilterID);
 
-            //Avoid the mouse move filter unless absolutely necessary as it can massively affect performance if the game gets primary input from mouse move messages
+            // Avoid the mouse move filter unless absolutely necessary as it can massively affect performance if the game gets primary input from mouse move messages
             //ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseMoveFilterID);
 
-            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.RawInputFilterID);
             ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseActivateFilterID);
             ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateFilterID);
             ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateAppFilterID);
             ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseWheelFilterID);
             ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseButtonFilterID);
+            ProtoInput.EnableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.KeyboardButtonFilterID);
 
             ProtoInput.SetDrawFakeCursor(player.ProtoInputInstanceHandle, true);
+            ProtoInput.StopFocusMessageLoop(player.ProtoInputInstanceHandle);
         }
     };
 
@@ -207,6 +235,7 @@ Game.Play = function () {
             ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.WindowActivateAppFilterID);
             ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseWheelFilterID);
             ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.MouseButtonFilterID);
+            ProtoInput.DisableMessageFilter(player.ProtoInputInstanceHandle, ProtoInput.Values.KeyboardButtonFilterID);
 
             ProtoInput.SetDrawFakeCursor(player.ProtoInputInstanceHandle, false);
         }
