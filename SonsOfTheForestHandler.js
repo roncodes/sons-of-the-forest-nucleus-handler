@@ -82,7 +82,7 @@ Game.Hook.XInputReroute = false;
 Game.Hook.CustomDllEnabled = false;
 
 // Goldberg Emulator
-Game.UseGoldberg = false;
+Game.UseGoldberg = true;
 
 // ProtoInput
 Game.ProtoInput.InjectStartup = false;
@@ -136,9 +136,9 @@ Game.ProtoInput.EnableFocusMessageLoop = false;
 Game.ProtoInput.BlockedMessages = [0x0008, 0x02a3, 0x02a1]; // Blocks WM_KILLFOCUS, WM_MOUSEHOVER and WM_MOUSELEAVE
 
 // Extra Configurations
-Game.HideCursor = true;
+Game.HideCursor = false;
 Game.HideDesktop = false;
-Game.HideTaskbar = true;
+Game.HideTaskbar = false;
 Game.Description = 'Game Handler for ' + GAME_NAME + ' - Work in Progress';
 
 // Support Mouse & Keyboards
