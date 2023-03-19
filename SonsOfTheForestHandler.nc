@@ -144,6 +144,14 @@ Game.Play = function () {
         Game.ProtoInput.KeyboardButtonFilter = true;
     } else {
         Game.ProtoInput.KeyboardButtonFilter = false;
+
+        var savePath = Context.GetFolder(Nucleus.Folder.InstancedGameFolder) + '\\XInputPlus.ini';
+        Context.ModifySaveFile(savePath, savePath, Nucleus.SaveType.INI, [
+            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller1', Context.GamepadId),
+            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller2', Context.GamepadId),
+            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller3', Context.GamepadId),
+            new Nucleus.IniSaveInfo('ControllerNumber', 'Controller4', Context.GamepadId),
+        ]);
     }
 
     Game.ProtoInput.OnInputLocked = function () {
