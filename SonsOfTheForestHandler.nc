@@ -1,7 +1,7 @@
-const GAME_NAME = 'Sons Of The Forest';
-const WINDOWS_GAME_NAME = GAME_NAME.replace(/ /g, '');
-const APPDATA_PATH = 'AppData\\LocalLow\\Endnight\\' + WINDOWS_GAME_NAME;
-const VERSION = 1;
+var GAME_NAME = 'Sons Of The Forest';
+var WINDOWS_GAME_NAME = GAME_NAME.replace(/ /g, '');
+var APPDATA_PATH = 'AppData\\LocalLow\\Endnight\\' + WINDOWS_GAME_NAME;
+var VERSION = 1;
 
 // Hub Info
 Hub.Handler.Version = VERSION;
